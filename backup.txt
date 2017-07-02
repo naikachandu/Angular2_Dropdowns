@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Select Company or Make</h1>
+<select [(ngModel)]="selectedCompany">
+  <option [ngValue]="company" *ngFor="let company of company">{{company.name}}</option> 
+</select> 
+<h4>{{selectedCompany.name}}</h4>
+<div *ngIf="selectedCompany.is_in_navigation">
+<select>
+  <option *ngFor="let company of company">{{company.name}}</option> 
+</select>  
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+import { Component, OnInit } from '@angular/core';
+import { Http} from '@angular/http';
+import { CompanyService} from 'service/service';  
+import { Observable} from 'rxjs/Rx';  
+import { Company } from 'data/make'; 
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  providers:[CompanyService]
+})
+export class AppComponent implements OnInit {
+  title = 'app';
+  company: Company[];  
+  selectedCompany: Object = {};
+  car:String;
+    errorMessage: string;  
+    ///    
+    constructor(private make: CompanyService) {  
+        this.company = [];  
+    }  
+    ///    
+    ngOnInit(): void {  
+        let self = this;  
+        self.make.getArticles().subscribe(response => this.company = response, error => this.errorMessage = < any > error);  
+        console.log(this.company);
+    }  
+    
+}
