@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Select Company or Make</h1>
-<select [(ngModel)]="selectedCompany" (ngModelChange)="onChange($event)">
+<header>
+  <div class="make">
+<h3>Select Company or Make</h3>
+<select [(ngModel)]="selectedCompany" (ngModelChange)="onChange($event)" placeholder="Select make">
   <option [ngValue]="company" *ngFor="let company of company"><div *ngIf="company.is_in_navigation">{{company.make}}</div></option> 
 </select>
-<div *ngIf="selectedCompany.is_in_navigation">
+  </div>
+  
+<div class="model" *ngIf="selectedCompany.is_in_navigation">
+  <h3>Select Model</h3>
 <select [(ngModel)]="carModels">
   <option [ngValue]="model" *ngFor="let model of models; let i = index">{{model.model}}</option> 
 </select>
+</div>
+</header>
 <p>{{carModels.name}}</p>
 <img *ngIf="carModels.is_in_navigation" src={{carModels.image}}>
-</div>
-</body>
-</html>
+
+

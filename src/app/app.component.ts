@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     onChange(value){      
       if(value.is_in_navigation){        
         if(value.make == this.ford.make){          
-           this.models=this.ford.models;
+           this.models=this.ford.models;           
            console.log(this.models);
         }
        else 
